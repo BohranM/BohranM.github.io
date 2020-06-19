@@ -21,14 +21,13 @@ var basemaps = {
   ),
 
   "تصویر ماهواره‌ای": L.tileLayer(
-    "https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}",
+    "https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}",
     {
       minZoom: 2,
       maxZoom: 19,
-      id: "google.hybrid"
+      id: "google.satellite"
     }
-  )
-};
+  ),
 
 //Init Overlays
 var overlays = {};
