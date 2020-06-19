@@ -12,22 +12,23 @@ $(document).ready(function() {
 
 var basemaps = {
   "نقشه شهری": L.tileLayer(
-    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-    {
-      minZoom: 2,
-      maxZoom: 19,
-      id: "osm.streets"
-    }
+      "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+      {
+        minZoom: 2,
+        maxZoom: 19,
+        id: "osm.streets"
+      }
   ),
 
   "تصویر ماهواره‌ای": L.tileLayer(
-    "https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}",
-    {
-      minZoom: 2,
-      maxZoom: 19,
-      id: "google.satellite"
-    }
+      "https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}",
+      {
+        minZoom: 2,
+        maxZoom: 19,
+        id: "google.satellite"
+      }
   ),
+}
 
 //Init Overlays
 var overlays = {};
