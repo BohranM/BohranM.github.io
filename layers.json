@@ -1,6 +1,6 @@
 {
     "layers": [
-        {
+       {
             "id": "TSCLGA",
 			"name": "TSC LGA",
             "geojson": "layers\/lga.geojson",

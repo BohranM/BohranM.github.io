@@ -9,45 +9,23 @@ $(document).ready(function() {
 });
 
 //Init BaseMaps
+
 var basemaps = {
-  "OpenStreetMaps": L.tileLayer(
-    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-    {
-      minZoom: 2,
-      maxZoom: 19,
-      id: "osm.streets"
-    }
+  "نقشه": L.tileLayer(
+      "https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png",
+      {
+        minZoom: 1,
+        maxZoom: 20,
+        id: "roads"
+      }
   ),
-  "Google-Map": L.tileLayer(
-    "https://mt1.google.com/vt/lyrs=r&x={x}&y={y}&z={z}",
-    {
-      minZoom: 2,
-      maxZoom: 19,
-      id: "google.street"
-    }
-  ),
-  "Google-Satellite": L.tileLayer(
-    "https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}",
-    {
-      minZoom: 2,
-      maxZoom: 19,
-      id: "google.satellite"
-    }
-  ),
-  "Google-Hybrid": L.tileLayer(
+
+  "تصویر ماهواره‌ای": L.tileLayer(
     "https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}",
     {
       minZoom: 2,
       maxZoom: 19,
       id: "google.hybrid"
-    }
-  ),
-  "Six-Aerial": L.tileLayer(
-    "http://maps.six.nsw.gov.au/arcgis/rest/services/public/NSW_Imagery/MapServer/tile/{z}/{y}/{x}",
-    {
-      minZoom:2,
-      maxZoom:20,
-      id:'six.aerial'
     }
   )
 };
@@ -59,10 +37,11 @@ var overlays = {};
 var map = L.map("map", {
   zoomControl: false,
   attributionControl: false,
-  center: [-29.0529434318608, 152.01910972595218],
+  /*center: [-29.0529434318608, 152.01910972595218],*/
+  center: [59.5707,36.0947],
   zoom: 10,
   editable: true,
-  layers: [basemaps.OpenStreetMaps]
+  layers: [basemaps.نقشه]
 });
 
 //Init Zoom Control
@@ -79,8 +58,8 @@ var sidebar = L.control.sidebar({
 
 //Init Layer Control
 var layerControl = L.control.layers(
-  basemaps, 
-  overlays, 
+  basemaps,
+  overlays,
   {
     position: "topright",
     collapsed: false
@@ -90,8 +69,8 @@ var layerControl = L.control.layers(
 //Move Layers control to sidebar
 var layerControlContainer = layerControl.getContainer();
 $("#layercontrol").append(layerControlContainer);
-$(".leaflet-control-layers-list").prepend("<strong class='title'>Base Maps</strong><br>");
-$(".leaflet-control-layers-separator").after("<br><strong class='title'>Layers</strong><br>");
+$(".leaflet-control-layers-list").prepend("<strong class='title'>لایه‌های پایه</strong><br>");
+$(".leaflet-control-layers-separator").after("<br><strong class='title'>لایه‌های کاربردی</strong><br>");
 
 //Handle Map click to Display Lat/Lng
 map.on('click', function(e) {
