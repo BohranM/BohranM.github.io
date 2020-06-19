@@ -40,7 +40,7 @@ var map = L.map("map", {
   center: [59.5707,36.0947],
   zoom: 10,
   editable: true,
-  layers: [basemaps.نقشه]
+  layers: [basemaps["نقشه"]],
 });
 
 //Init Zoom Control
