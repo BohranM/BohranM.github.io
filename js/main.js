@@ -27,7 +27,7 @@ var basemaps = {
         maxZoom: 19,
         id: "google.satellite"
       }
-  ),
+  )
 }
 
 //Init Overlays
