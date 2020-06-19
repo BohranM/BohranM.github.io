@@ -43,6 +43,14 @@ var map = L.map("map", {
   editable: true,
   layers: [basemaps["نقشه شهری"]],
 });
+//logo position: bottomright, topright, topleft, bottomleft
+var logo = L.control({position: 'bottomleft'});
+logo.onAdd = function(map){
+  var div = L.DomUtil.create('div', 'myclass');
+  div.innerHTML= "<img src='data/Mashhad_government_logo.svg'/>";
+  return div;
+}
+logo.addTo(map);
 
 //Init Zoom Control
 L.control.zoom({
@@ -91,7 +99,7 @@ $('#latlng').click(function(e) {
 
 //Init Editable(Cosmetic) Layer for Leaflet Draw
 var editableLayers = new L.FeatureGroup().addTo(map);
-layerControl.addOverlay(editableLayers, "Cosmetic Layer");
+layerControl.addOverlay(editableLayers, "موانع شهری");
 
 //Init Leaflet Draw
 var drawControl = new L.Control.Draw({
