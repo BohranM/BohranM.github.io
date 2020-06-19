@@ -14,7 +14,6 @@ var basemaps = {
   "نقشه": L.tileLayer(
       "https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png",
       {
-        minZoom: 1,
         maxZoom: 20,
         id: "roads"
       }
