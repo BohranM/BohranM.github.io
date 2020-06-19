@@ -11,12 +11,13 @@ $(document).ready(function() {
 //Init BaseMaps
 
 var basemaps = {
-  "نقشه": L.tileLayer(
-      "https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png",
-      {
-        maxZoom: 20,
-        id: "roads"
-      }
+  "نقشه شهری": L.tileLayer(
+    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+    {
+      minZoom: 2,
+      maxZoom: 19,
+      id: "osm.streets"
+    }
   ),
 
   "تصویر ماهواره‌ای": L.tileLayer(
@@ -40,7 +41,7 @@ var map = L.map("map", {
   center: [59.5707,36.0947],
   zoom: 10,
   editable: true,
-  layers: [basemaps["نقشه"]],
+  layers: [basemaps["نقشه شهری"]],
 });
 
 //Init Zoom Control
