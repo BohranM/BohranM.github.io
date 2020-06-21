@@ -3,9 +3,17 @@
        {
             "id": "roads",
 			"name": "معابر شعری",
-            "geojson": "layers\/lga.geojson",
+            "geojson": "layers\/network.geojson",
 			"enabled": "true",
 			"visible": "true"
+        }
+    ,
+        {
+          "id": "ponits",
+          "name": "مراکز جمعیتی",
+          "geojson": "layers\/points.geojson",
+          "enabled": "true",
+          "visible": "true"
         }
     ]
 }

@@ -38,11 +38,13 @@ var map = L.map("map", {
   zoomControl: false,
   attributionControl: false,
   /*center: [-29.0529434318608, 152.01910972595218],*/
-  center: [59.5707,36.0947],
-  zoom: 10,
+  center: [36.24170,59.59622],
+  zoom: 16,
   editable: true,
   layers: [basemaps["نقشه شهری"]],
 });
+
+//Adding Logo
 //logo position: bottomright, topright, topleft, bottomleft
 var logo = L.control({position: 'bottomleft'});
 logo.onAdd = function(map){
@@ -70,11 +72,14 @@ var layerControl = L.control.layers(
   overlays,
   {
     position: "topright",
-    collapsed: false
+    collapsed: false,
+
   }
 ).addTo(map);
 
 //Move Layers control to sidebar
+// $("#layercontrol") selects all elements where their ID is layercontrol
+
 var layerControlContainer = layerControl.getContainer();
 $("#layercontrol").append(layerControlContainer);
 $(".leaflet-control-layers-list").prepend("<strong class='title'>لایه‌های پایه</strong><br>");
@@ -97,6 +102,32 @@ $('#latlng').click(function(e) {
 	$("#latlng").hide();
 });
 
+var networkLayer = $.getJSON("layers/network.geojson", function(data) {
+    L.geoJSON(data).addTo(map);
+});
+
+var style = {
+    radius: 5,
+    fillColor: "red",
+    color: "green",
+    weight: 1,
+    opacity: 1,
+    fillOpacity: 0.8
+};
+
+
+var pointsLayer = $.getJSON("layers/points.geojson", function(data) {
+    L.geoJSON(data,{
+        pointToLayer: function(feature, latlng) {
+        return L.circleMarker(latlng, style);
+    }}).addTo(map);
+});
+
+console.debug(typeof pointsLayer)
+
+
+
+/*
 //Init Editable(Cosmetic) Layer for Leaflet Draw
 var editableLayers = new L.FeatureGroup().addTo(map);
 layerControl.addOverlay(editableLayers, "موانع شهری");
@@ -139,18 +170,18 @@ map.on(L.Draw.Event.CREATED, function(e) {
 
   editableLayers.addLayer(layer);
   console.log("Draw Create", JSON.stringify(editableLayers.toGeoJSON()));
-  /*$(".drawercontainer .drawercontent").html(
+  /!*$(".drawercontainer .drawercontent").html(
     JSON.stringify(editableLayers.toGeoJSON())
-  );*/
+  );*!/
 });
 
 //On Draw Edit Event
 map.on(L.Draw.Event.EDITED, function(e) {
   console.log("Draw Edit", JSON.stringify(editableLayers.toGeoJSON()));
   editableLayers.removeLayer(selectedFeature);
-  /*$(".drawercontainer .drawercontent").html(
+  /!*$(".drawercontainer .drawercontent").html(
     JSON.stringify(editableLayers.toGeoJSON())
-  );*/
+  );*!/
 });
 
 //On Draw Delete Event
@@ -189,7 +220,8 @@ var bounds= new L.latLngBounds();
 var selectedFeature = null;
 var previousSelectedFeature = null;
 var parentLayer = null;
-
+*/
+/*
 //Load Layer Config
 function loadLayerConfig() {
   $.getJSON("layers.json", function(data) {}).done(function( data ) {
@@ -197,7 +229,9 @@ function loadLayerConfig() {
       //console.log("Config Layer: "+layer.name+" Enabled: "+layer.enabled+" Visible: "+layer.visible);
       if(layer.enabled!="false") 
       {
-        $.getJSON(layer.geojson, function(data) { 
+        $.getJSON(layer.geojson, function(data) {
+
+
           addDataToMap(data, map, layer.name, layer.visible); 
         });
       }
@@ -386,6 +420,6 @@ function updateDrawTools()
     $("#ExportGeoJSON").attr("title", "Export Layers to GeoJSON")
     $("#ExportGeoJSON").removeClass("leaflet-disabled");
   }
-}
+}*/
 
 setInterval(updateDrawTools, 1000);
