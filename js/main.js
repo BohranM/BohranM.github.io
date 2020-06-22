@@ -102,28 +102,65 @@ $('#latlng').click(function(e) {
 	$("#latlng").hide();
 });
 
-var networkLayer = $.getJSON("layers/network.geojson", function(data) {
-    L.geoJSON(data).addTo(map);
+
+var net = $.getJSON("layers/network.geojson", function(data) {
+     L.geoJson(data).addTo(map);
 });
+
 
 var style = {
     radius: 5,
     fillColor: "red",
-    color: "green",
+    color: "red",
+    weight: 1,
+    opacity: 1,
+    fillOpacity: 0.8
+};
+
+var style2 = {
+    radius: 9,
+    fillColor: "yellow",
+    color: "yellow",
     weight: 1,
     opacity: 1,
     fillOpacity: 0.8
 };
 
 
-var pointsLayer = $.getJSON("layers/points.geojson", function(data) {
-    L.geoJSON(data,{
+
+
+
+var points_ = $.getJSON("layers/points.geojson", function(data) {
+L.geoJSON(data,{
         pointToLayer: function(feature, latlng) {
         return L.circleMarker(latlng, style);
     }}).addTo(map);
 });
 
-console.debug(typeof pointsLayer)
+
+var safePoints_;$.getJSON("layers/eskan.geojson", function(data) {
+    L.geoJSON(data,{
+        pointToLayer: function(feature, latlng) {
+            return L.circleMarker(latlng, style2);
+        }}).addTo(map);
+});
+
+
+var start = turf.point([59.589907, 36.239304]);
+var end = turf.point([59.5953678, 36.2422286]);
+var startPoint = L.geoJSON(start).addTo(map);
+var endPoint = L.geoJSON(end).addTo(map);
+
+var pathFinder = new PathFinder(net);
+
+route = pathFinder.findPath(startPoint, endPoint);
+
+safe_route = turf.lineString(route.path);
+L.geoJson(safe_route, {
+    weight: 2,
+    color: '#ff7f50'}).addTo(map);
+
+
 
 
 
